@@ -1,0 +1,15 @@
+<table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Tienda</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tienda of tiendas">
+        <td>{{ tienda.id }}</td>
+        <td>{{ tienda.tienda }}</td>
+        <td>{{ tienda.direccion }}</td>
+      </tr>
+    </tbody>
+  </table>
