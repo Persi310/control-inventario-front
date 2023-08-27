@@ -18,8 +18,12 @@ export class CategoriasComponent {
         this.categorias = data.categorias;
       },
       (error) => {
-        console.error('Error al obtener las marcas:', error);
+        console.error('Error al obtener las categorias:', error);
       }
     );
+  }
+
+  agregarCategoria() {
+    
   }
 }
