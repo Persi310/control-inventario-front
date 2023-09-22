@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { Marca } from 'src/app/models/marca';
+import { HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Compra } from 'src/app/models/compra';
+import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MarcaService {
+export class ComprasService {
 
-    private apiUrl = 'http://127.0.0.1:8000/api';
+  private apiUrl = 'http://127.0.0.1:8000/api';
   
     constructor(private http: HttpClient) { }
 
@@ -20,12 +21,12 @@ export class MarcaService {
       }),
     };
   
-    getMarcas(): Observable<{ message: string, marcas: Marca[] }> {
-      return this.http.get<{ message: string, marcas: Marca[] }>(`${this.apiUrl}/marcas`);
+    getCompras(): Observable<{ message: string, compras: Compra[] }> {
+      return this.http.get<{ message: string, compras: Compra[] }>(`${this.apiUrl}/compras`);
     }
 
-    agregarMarca(marca: string): Observable<{ mensaje: string }> {
-      return this.http.post<{ mensaje: string }>(`${this.apiUrl}/marcas`, { marca }, this.httpOptions)
+    agregarCompras(compra: string): Observable<{ mensaje: string }> {
+      return this.http.post<{ mensaje: string }>(`${this.apiUrl}/compras`, { compra }, this.httpOptions)
         .pipe(
           catchError(this.handleError)
         );
@@ -43,4 +44,4 @@ export class MarcaService {
       // Devuelve un observable con un mensaje de error
       return throwError('Ocurrió un error. Por favor, intenta de nuevo más tarde.');
     }
-  }
+}

@@ -4,7 +4,7 @@ export interface Producto {
     descripcion: string;
     precio: string;
     cantidad_minima: string;
-    categoria_id: string;
-    marca_id: string;
-    proveedor_id: string;
+    categoria__categoria: string;
+    marca__marca: string;
+    proveedor__first_name: string;
 }

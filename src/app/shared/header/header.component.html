@@ -5,10 +5,14 @@
     </a>
   </div>
   <div class="header-buttons">
-    <button routerLink="/producto">Productos</button>
-    <button routerLink="/marca">Marcas</button>
-    <button routerLink="/tienda">Tiendas</button>
-    <button routerLink="/users">Usuarios</button>
-    <button routerLink="/categoria">Categorías</button>
+    <button *ngIf="loginService.isUserLoggedIn()" routerLink="/producto">Productos</button>
+    <button *ngIf="loginService.isUserLoggedIn()" routerLink="/compras">Compras</button>
+    <button *ngIf="loginService.isUserLoggedIn()" routerLink="/ventas">Ventas</button>
+    <button *ngIf="loginService.isUserLoggedIn()" routerLink="/inventario">Inventario</button>
+    <button *ngIf="loginService.isUserLoggedIn()" routerLink="/marca">Marcas</button>
+    <button *ngIf="loginService.isUserLoggedIn()" routerLink="/tienda">Tiendas</button>
+    <button *ngIf="loginService.isUserLoggedIn()" routerLink="/users">Usuarios</button>
+    <button *ngIf="loginService.isUserLoggedIn()" routerLink="/categoria">Categorías</button>
+    <button *ngIf="loginService.isUserLoggedIn()" (click)="loginService.logout()" >Cerrar Sesion</button>
   </div>
 </header>

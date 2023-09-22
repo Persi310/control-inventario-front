@@ -15,6 +15,14 @@ import { MarcaComponent } from './pages/marca/marca.component';
 import { ProductoComponent } from './pages/producto/producto.component';
 import { TiendaComponent } from './pages/tienda/tienda.component';
 import { UsersComponent } from './pages/users/users.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { VentasComponent } from './pages/ventas/ventas.component';
+import { ComprasComponent } from './pages/compras/compras.component';
+import { InventarioComponent } from './pages/inventario/inventario.component';
+import { CategoriaDialogComponent } from './categoria-dialog/categoria-dialog.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -29,13 +37,21 @@ import { UsersComponent } from './pages/users/users.component';
     ProductoComponent,
     TiendaComponent,
     UsersComponent,
+    VentasComponent,
+    ComprasComponent,
+    InventarioComponent,
+    CategoriaDialogComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    MatSnackBarModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule,
+    BrowserAnimationsModule
   ],
   providers: [
     
