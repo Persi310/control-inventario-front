@@ -11,6 +11,7 @@ import { UsersComponent } from './pages/users/users.component';
 import { ComprasComponent } from './pages/compras/compras.component';
 import { VentasComponent } from './pages/ventas/ventas.component';
 import { InventarioComponent } from './pages/inventario/inventario.component';
+import { RecuperarContrasenaComponent } from './recuperar-contrasena/recuperar-contrasena.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'producto', component: ProductoComponent, canActivate: [AuthGuard] },
   { path: 'tienda', component: TiendaComponent, canActivate: [AuthGuard] },
   { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
+  { path: 'recuperar-contrasena', component: RecuperarContrasenaComponent },
 ];
 
 @NgModule({

@@ -57,4 +57,8 @@ export class LoginComponent {
     }
   }
 
+  recuperarContrasena() {
+    this.router.navigate(['/recuperar-contrasena']);
+  }
+
 }

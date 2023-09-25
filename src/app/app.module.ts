@@ -23,6 +23,7 @@ import { InventarioComponent } from './pages/inventario/inventario.component';
 import { CategoriaDialogComponent } from './categoria-dialog/categoria-dialog.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { RecuperarContrasenaComponent } from './recuperar-contrasena/recuperar-contrasena.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     InventarioComponent,
     CategoriaDialogComponent,
     ConfirmDialogComponent,
+    RecuperarContrasenaComponent,
   ],
   imports: [
     BrowserModule,
