@@ -25,6 +25,20 @@ export class CategoriasService {
       return this.http.get<{ message: string, categorias: Categoria[] }>(`${this.apiUrl}/categorias`);
     }
 
+    actualizarCategoria(categoria_parametro: Categoria): Observable<{ message: string; categorias: Categoria[] }> {
+      const { id, categoria } = categoria_parametro; // Obtener el id y nombre de la categoría
+      const categoriaActualizada = { categoria };
+      return this.http.put<{ message: string; categorias: Categoria[] }>(
+        `${this.apiUrl}/categorias/${id}`,
+        categoriaActualizada, // Enviar solo el nombre
+        this.httpOptions
+      );
+    }
+
+    eliminarCategoria(categoria_id: number): Observable<{ message: string; categorias: Categoria[]; }> {
+      return this.http.delete<{ message: string; categorias: Categoria[]; }>(`${this.apiUrl}/categorias/${categoria_id}`, this.httpOptions);
+    }
+
     agregarCategoria(categoria: string): Observable<{ mensaje: string }> {
       return this.http.post<{ mensaje: string }>(`${this.apiUrl}/categorias`, { categoria }, this.httpOptions)
         .pipe(

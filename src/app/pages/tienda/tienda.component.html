@@ -8,6 +8,7 @@
         <th>ID</th>
         <th>Tienda</th>
         <th>Direccion</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -15,6 +16,11 @@
         <td>{{ tienda.id }}</td>
         <td>{{ tienda.tienda }}</td>
         <td>{{ tienda.direccion }}</td>
+        <td>
+          <button class="btn btn-info btn-sm" (click)="verTienda(tienda)">Ver</button>
+          <button class="btn btn-warning btn-sm" (click)="editarTienda(tienda)">Editar</button>
+          <button class="btn btn-danger btn-sm" (click)="eliminarTienda(tienda)">Eliminar</button>
+        </td>
       </tr>
     </tbody>
   </table>

@@ -13,6 +13,7 @@
         <th>Categoria</th>
         <th>Marca</th>
         <th>Proveedor</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -25,6 +26,11 @@
         <td>{{ producto.categoria__categoria }}</td>
         <td>{{ producto.marca__marca }}</td>
         <td>{{ producto.proveedor__first_name }}</td>
+        <td>
+          <button class="btn btn-info btn-sm" (click)="verProducto(producto)">Ver</button>
+          <button class="btn btn-warning btn-sm" (click)="editarProducto(producto)">Editar</button>
+          <button class="btn btn-danger btn-sm" (click)="eliminarProducto(producto)">Eliminar</button>
+        </td>
       </tr>
     </tbody>
   </table>

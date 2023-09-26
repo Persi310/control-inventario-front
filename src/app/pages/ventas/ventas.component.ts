@@ -10,7 +10,7 @@ import { Venta } from 'src/app/models/venta';
 })
 export class VentasComponent {
   ventas: Venta[] = [];
-  nuevaVentas: string = '';
+  nuevaVentas: { producto: string, cantidad: number , precio: number} = { producto: '', cantidad: 0.0 , precio: 0.0};
   
   constructor(private ventaService: VentasService, private _snackBar: MatSnackBar) { }
 
@@ -26,7 +26,7 @@ export class VentasComponent {
   }
 
   agregarVenta() {
-    if (!this.nuevaVentas || this.nuevaVentas.trim() === '') {
+    if (!this.nuevaVentas || this.nuevaVentas.producto === '') {
       console.error('El nombre de la marca no puede estar vacío');
       return;
     }
@@ -42,7 +42,7 @@ export class VentasComponent {
       }
     );
   
-    this.nuevaVentas = '';
+    this.nuevaVentas = {producto: '', cantidad: 0.0 , precio: 0.0};
   }
 
 }

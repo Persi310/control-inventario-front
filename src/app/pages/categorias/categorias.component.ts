@@ -37,10 +37,10 @@ export class CategoriasComponent {
     this.categoriasService.agregarCategoria(this.nuevaCategoria).subscribe(
       (data) => {
         console.log(data);
-        this._snackBar.open("Marca agregada satisfactoriamente", "X");
+        this._snackBar.open("Categoria agregada satisfactoriamente", "X");
       },
       (error) => {
-        console.error('Error al agregar la marca:', error);
+        console.error('Error al agregar la Categoria:', error);
         this._snackBar.open(error, "X");
       }
     );
@@ -55,21 +55,46 @@ export class CategoriasComponent {
   }
   
   editarCategoria(categoria: Categoria) {
-    this.dialog.open(CategoriaDialogComponent, {
+    console.log('Editar categoría:', categoria);
+    const dialogRef = this.dialog.open(CategoriaDialogComponent, {
       data: { categoria, isEditing: true },
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('Resultado del diálogo:', result);
+      if (result && result.isEditing) {
+        console.log(result.categoria)
+        this.categoriasService.actualizarCategoria(result.categoria).subscribe(
+          (data) => {
+            console.log(data);
+            this._snackBar.open("Categoria editada satisfactoriamente", "X");
+          },
+          (error) => {
+            console.error('Error al editar la categoria:', error);
+            this._snackBar.open(error, "X");
+          }
+        );
+      }
     });
   }
   
-  eliminarCategoria(categoria: any) {
+  eliminarCategoria(categoria: Categoria) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: { message: '¿Seguro que deseas eliminar esta categoría?' },
     });
   
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        // Lógica para eliminar la categoría aquí.
-        // Implementa la lógica de eliminación de la categoría.
-        // Por ejemplo, this.categoriasService.eliminarCategoria(categoria.id);
+        this.categoriasService.eliminarCategoria(categoria.id).subscribe(
+          (data) => {
+            console.log(data);
+            this._snackBar.open("Categoria Eliminada satisfactoriamente", "X");
+          },
+          (error) => {
+            console.error('Error al eliminar la categoria:', error);
+            this._snackBar.open(error, "X");
+          }
+        );
       }
     });
   }

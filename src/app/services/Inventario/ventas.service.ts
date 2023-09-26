@@ -25,8 +25,8 @@ export class VentasService {
       return this.http.get<{ message: string, ventas: Venta[] }>(`${this.apiUrl}/ventas`);
     }
 
-    agregarVenta(categoria: string): Observable<{ mensaje: string }> {
-      return this.http.post<{ mensaje: string }>(`${this.apiUrl}/ventas`, { categoria }, this.httpOptions)
+    agregarVenta(venta: {producto: string, cantidad: number , precio: number}): Observable<{ mensaje: string }> {
+      return this.http.post<{ mensaje: string }>(`${this.apiUrl}/ventas`, { venta }, this.httpOptions)
         .pipe(
           catchError(this.handleError)
         );

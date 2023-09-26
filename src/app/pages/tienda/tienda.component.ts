@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { TiendasService } from 'src/app/services/Inventario/tiendas.service';
 import { Tienda } from 'src/app/models/tienda';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Categoria } from 'src/app/models/categoria';
+import { MatDialog } from '@angular/material/dialog';
+import { TiendaDialogComponent } from 'src/app/tienda-dialog/tienda-dialog.component';
+import { ConfirmDialogComponent } from 'src/app/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-tienda',
@@ -12,7 +16,7 @@ export class TiendaComponent {
   tiendas: Tienda[] = [];
   nuevaTienda: { tienda: string, direccion: string } = { tienda: '', direccion: '' };
 
-  constructor(private tiendaService: TiendasService, private _snackBar: MatSnackBar) { }
+  constructor(private tiendaService: TiendasService, private _snackBar: MatSnackBar, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.tiendaService.getTiendas().subscribe(
@@ -44,6 +48,32 @@ export class TiendaComponent {
   
     // Reiniciar los campos después de agregar la tienda
     this.nuevaTienda = { tienda: '', direccion: '' };
+  }
+
+  verTienda(tiendas: Tienda) {
+    this.dialog.open(TiendaDialogComponent, {
+      data: { tiendas },
+    });
+  }
+  
+  editarTienda(tiendas: Tienda) {
+    this.dialog.open(TiendaDialogComponent, {
+      data: { tiendas, isEditing: true },
+    });
+  }
+  
+  eliminarTienda(tiendas: any) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: { message: '¿Seguro que deseas eliminar esta categoría?' },
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        // Lógica para eliminar la categoría aquí.
+        // Implementa la lógica de eliminación de la categoría.
+        // Por ejemplo, this.categoriasService.eliminarCategoria(categoria.id);
+      }
+    });
   }
   
 }

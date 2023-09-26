@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { MarcaService } from 'src/app/services/Inventario/marca.service';
 import { Marca } from 'src/app/models/marca';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { MarcaDialogComponent } from 'src/app/marca-dialog/marca-dialog.component';
+import { ConfirmDialogComponent } from 'src/app/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-marca',
@@ -13,7 +16,7 @@ export class MarcaComponent {
   marcas: Marca[] = [];
   nuevaMarca: string = '';
 
-  constructor(private marcaService: MarcaService, private _snackBar: MatSnackBar) { }
+  constructor(private marcaService: MarcaService, private _snackBar: MatSnackBar, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.marcaService.getMarcas().subscribe(
@@ -44,6 +47,32 @@ export class MarcaComponent {
     );
   
     this.nuevaMarca = '';
+  }
+
+  verMarca(marcas: Marca) {
+    this.dialog.open(MarcaDialogComponent, {
+      data: { marcas },
+    });
+  }
+  
+  editarMarca(marcas: Marca) {
+    this.dialog.open(MarcaDialogComponent, {
+      data: { marcas, isEditing: true },
+    });
+  }
+  
+  eliminarMarca(marcas: any) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: { message: '¿Seguro que deseas eliminar esta categoría?' },
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        // Lógica para eliminar la categoría aquí.
+        // Implementa la lógica de eliminación de la categoría.
+        // Por ejemplo, this.categoriasService.eliminarCategoria(categoria.id);
+      }
+    });
   }
 
 }

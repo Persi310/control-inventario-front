@@ -7,6 +7,9 @@ import { Marca } from 'src/app/models/marca';
 import { Categoria } from 'src/app/models/categoria';
 import { Usuarios } from 'src/app/models/usuarios';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { ProductoDialogComponent } from 'src/app/producto-dialog/producto-dialog.component';
+import { ConfirmDialogComponent } from 'src/app/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-producto',
@@ -23,7 +26,7 @@ export class ProductoComponent {
   marcas: Marca[] = [];
   proveedores: Usuarios[] = [];
 
-  constructor(private productoService: ProductosService, private http: HttpClient, private _snackBar: MatSnackBar) { }
+  constructor(private productoService: ProductosService, private _snackBar: MatSnackBar, private dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -82,6 +85,32 @@ export class ProductoComponent {
     );
   
     this.nuevoProducto = { nombre:'', descripcion: '', precio: 0.00, cantidad_minima: 0, categoria_id: 0, marca_id: 0, proveedor_id: 0};
+  }
+
+  verProducto(productos: Producto) {
+    this.dialog.open(ProductoDialogComponent, {
+      data: { productos },
+    });
+  }
+  
+  editarProducto(productos: Producto) {
+    this.dialog.open(ProductoDialogComponent, {
+      data: { productos, isEditing: true },
+    });
+  }
+  
+  eliminarProducto(productos: any) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: { message: '¿Seguro que deseas eliminar esta categoría?' },
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        // Lógica para eliminar la categoría aquí.
+        // Implementa la lógica de eliminación de la categoría.
+        // Por ejemplo, this.categoriasService.eliminarCategoria(categoria.id);
+      }
+    });
   }
 
 }

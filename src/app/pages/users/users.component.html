@@ -13,6 +13,7 @@
         <th>Direccion</th>
         <th>Telefono</th>
         <th>Nombre de la Empresa</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -25,6 +26,11 @@
         <td>{{ usuario.direccion }}</td>
         <td>{{ usuario.telefono }}</td>
         <td>{{ usuario.nombre_empresa }}</td>
+        <td>
+          <button class="btn btn-info btn-sm" (click)="verUsers(usuario)">Ver</button>
+          <button class="btn btn-warning btn-sm" (click)="editarUsers(usuario)">Editar</button>
+          <button class="btn btn-danger btn-sm" (click)="eliminarUsers(usuario)">Eliminar</button>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -33,22 +39,52 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Categoria</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Usuario</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <!-- Aquí colocamos el formulario -->
           <form>
             <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label">Categoria</label>
-              <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese el nombre de la categoria">
+              <label class="switch">
+                <span>El usuario es un administrador</span>
+                <input type="checkbox" id="is_superuser" [(ngModel)]="nuevoUsuarios.is_superuser">
+                <span class="slider"></span>
+              </label>
+              <label for="username" class="form-label">Username</label>
+              <input type="text" class="form-control" id="username" name="username" [(ngModel)]="nuevoUsuarios.username">
+              <label for="first_name" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="first_name" name="first_name" [(ngModel)]="nuevoUsuarios.first_name">
+              <label for="last_name" class="form-label">Apellido</label>
+              <input type="text" class="form-control" id="last_name" name="last_name" [(ngModel)]="nuevoUsuarios.last_name">
+              <label class="switch">
+                <span>Activo</span>
+                <input type="checkbox" id="is_active" [(ngModel)]="nuevoUsuarios.is_active">
+                <span class="slider"></span>
+              </label>
+              <label class="switch">
+                <span>El usuario es un administrador</span>
+                <input type="checkbox" id="is_staff" [(ngModel)]="nuevoUsuarios.is_staff">
+                <span class="slider"></span>
+              </label>
+              <label for="date_joined" class="form-label">Fecha de Union</label>
+              <input type="date" class="form-control" id="date_joined" name="date_joined" [(ngModel)]="nuevoUsuarios.date_joined">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" name="email" [(ngModel)]="nuevoUsuarios.email">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" name="password" [(ngModel)]="nuevoUsuarios.password">
+              <label for="direccion" class="form-label">Direccion</label>
+              <input type="text" class="form-control" id="direccion" name="direccion" [(ngModel)]="nuevoUsuarios.direccion">
+              <label for="telefono" class="form-label">Telefono</label>
+              <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="nuevoUsuarios.telefono">
+              <label for="nombre_empresa" class="form-label">Nombre de la empresa</label>
+              <input type="text" class="form-control" id="nombre_empresa" name="nombre_empresa" [(ngModel)]="nuevoUsuarios.nombre_empresa">
             </div>
-            <!-- Agrega más campos de formulario según tus necesidades -->
           </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary">Guardar cambios</button>
+          <button type="button" class="btn btn-primary" (click)="agregarUsuarios()">Guardar cambios</button>
         </div>
       </div>
     </div>

@@ -24,6 +24,10 @@ import { CategoriaDialogComponent } from './categoria-dialog/categoria-dialog.co
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RecuperarContrasenaComponent } from './recuperar-contrasena/recuperar-contrasena.component';
+import { MarcaDialogComponent } from './marca-dialog/marca-dialog.component';
+import { ProductoDialogComponent } from './producto-dialog/producto-dialog.component';
+import { TiendaDialogComponent } from './tienda-dialog/tienda-dialog.component';
+import { UsersDialogComponent } from './users-dialog/users-dialog.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +48,10 @@ import { RecuperarContrasenaComponent } from './recuperar-contrasena/recuperar-c
     CategoriaDialogComponent,
     ConfirmDialogComponent,
     RecuperarContrasenaComponent,
+    MarcaDialogComponent,
+    ProductoDialogComponent,
+    TiendaDialogComponent,
+    UsersDialogComponent,
   ],
   imports: [
     BrowserModule,

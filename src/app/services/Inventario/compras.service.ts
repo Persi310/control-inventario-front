@@ -25,7 +25,7 @@ export class ComprasService {
       return this.http.get<{ message: string, compras: Compra[] }>(`${this.apiUrl}/compras`);
     }
 
-    agregarCompras(compra: string): Observable<{ mensaje: string }> {
+    agregarCompras(compra: {producto_id: number, cantidad: number , precio: number}): Observable<{ mensaje: string }> {
       return this.http.post<{ mensaje: string }>(`${this.apiUrl}/compras`, { compra }, this.httpOptions)
         .pipe(
           catchError(this.handleError)
