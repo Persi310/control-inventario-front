@@ -1,26 +1,70 @@
-<h1>{{ data.isEditing ? 'Editar Categoría' : 'Ver Categoría' }}</h1>
-<form>
-  <div class="form-group">
-    <label for="categoria">Nombre de la Categoría</label>
-    <input
-      type="text"
-      class="form-control"
-      id="categoria"
-      name="categoria"
-      [(ngModel)]="categoria.nombre"
-      [disabled]="!data.isEditing"
-    />
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Usuario</h1>
+    </div>
+    <div class="modal-body">
+      <!-- Aquí colocamos el formulario -->
+      <form>
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username" [(ngModel)]="usuario.username" [disabled]="!data.isEditing">
+          </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="usuario.password" [disabled]="!data.isEditing">
+        </div>
+        <div class="mb-3">
+            <label for="first_name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="first_name" name="first_name" [(ngModel)]="usuario.first_name" [disabled]="!data.isEditing">
+        </div>
+        <div class="mb-3">
+            <label for="last_name" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" [(ngModel)]="usuario.last_name" [disabled]="!data.isEditing">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="usuario.email" [disabled]="!data.isEditing" >
+        </div>
+        <div class="mb-3">
+          <label for="date_joined" class="form-label">Fecha de Unión</label>
+          <input type="date" class="form-control" id="date_joined" name="date_joined" [(ngModel)]="usuario.date_joined" [disabled]="!data.isEditing">
+      </div>
+        <div class="mb-3">
+            <label for="direccion" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="direccion" name="direccion" [(ngModel)]="usuario.direccion" [disabled]="!data.isEditing">
+        </div>
+        <div class="mb-3">
+            <label for="telefono" class="form-label">Teléfono</label>
+            <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="usuario.telefono" [disabled]="!data.isEditing" >
+        </div>
+        <div class="mb-3">
+            <label for="nombre_empresa" class="form-label">Nombre de la empresa</label>
+            <input type="text" class="form-control" id="nombre_empresa" name="nombre_empresa" [(ngModel)]="usuario.nombre_empresa" [disabled]="!data.isEditing">
+        </div>
+        <div class="mb-3">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="is_superuser" [(ngModel)]="usuario.is_superuser" [disabled]="!data.isEditing">
+                <label class="form-check-label" for="is_superuser">El usuario es un administrador</label>
+            </div>
+        </div>
+        <div class="mb-3">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="is_active" [(ngModel)]="usuario.is_active" [disabled]="!data.isEditing">
+                <label class="form-check-label" for="is_active">Activo</label>
+            </div>
+        </div>
+        <div class="mb-3">
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="is_staff" [(ngModel)]="usuario.is_staff" [disabled]="!data.isEditing">
+                <label class="form-check-label" for="is_staff">El usuario es un staff</label>
+            </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cerrarDialog()">Cerrar</button>
+      <button *ngIf="data.isEditing" type="button" class="btn btn-primary" (click)="guardarCambios()">Guardar cambios</button>
+    </div>
   </div>
-</form>
-
-<div class="modal-footer">
-  <button type="button" class="btn btn-secondary" (click)="cerrarDialog()">Cerrar</button>
-  <button
-    *ngIf="data.isEditing"
-    type="button"
-    class="btn btn-primary"
-    (click)="guardarCambios()"
-  >
-    Guardar Cambios
-  </button>
 </div>

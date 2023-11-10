@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Usuarios } from '../models/usuarios';
 
 @Component({
   selector: 'app-users-dialog',
@@ -7,13 +8,17 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./users-dialog.component.css']
 })
 export class UsersDialogComponent {
-  categoria: any = {};
+  usuario: Usuarios;
+  userId: number;
 
   constructor(
     public dialogRef: MatDialogRef<UsersDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.categoria = { ...data.categoria }; // Copia la categoría para evitar cambios en el objeto original
+    this.usuario = { ...data.usuario };
+    this.userId = data.userId; // Asignar userId recibido
+
+    // Puedes utilizar this.userId en tu lógica para actualizar el usuario
   }
 
   cerrarDialog(): void {
@@ -21,8 +26,8 @@ export class UsersDialogComponent {
   }
 
   guardarCambios(): void {
-    // Aquí puedes implementar la lógica para guardar los cambios en la categoría
-    // this.categoria contiene la categoría editada
-    this.dialogRef.close();
+    // Puedes utilizar this.userId para enviar la actualización con el ID
+    this.usuario.id = this.userId; // Asignar el ID al usuario
+    this.dialogRef.close({ usuario: this.usuario, isEditing: true });
   }
 }

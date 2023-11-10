@@ -13,6 +13,6 @@
     <button *ngIf="loginService.isUserLoggedIn()" routerLink="/tienda">Tiendas</button>
     <button *ngIf="loginService.isUserLoggedIn()" routerLink="/users">Usuarios</button>
     <button *ngIf="loginService.isUserLoggedIn()" routerLink="/categoria">Categorías</button>
-    <button *ngIf="loginService.isUserLoggedIn()" (click)="loginService.logout()" >Cerrar Sesion</button>
+    <button *ngIf="loginService.isUserLoggedIn()" (click)="loginService.logout()" class="logout-button" >Cerrar Sesion</button>
   </div>
 </header>

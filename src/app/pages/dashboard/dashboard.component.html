@@ -1,1 +1,110 @@
-Dashboard 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background: #2C3E50;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 20px;
+      margin-bottom: 200px; /* Añade espacio adicional equivalente a la altura del footer */
+    }
+    .card {
+      width: 400px;
+      height: 300px;
+      margin: 20px;
+      background: #2C3E50;
+      color: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+      overflow: auto; /* Agregamos scroll si el contenido es grande */
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #fff; /* Ajustamos el borde */
+      padding: 8px;
+      text-align: left;
+      color: white;
+    }
+    th {
+      background-color: #34495E; /* Color de fondo de las celdas de encabezado */
+    }
+    tr:nth-child(even) {
+      background-color: #2C3E50; /* Color de fondo para las filas pares */
+    }
+    tr:nth-child(odd) {
+      background-color: #34495E; /* Color de fondo para las filas impares */
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Dashboard</h1>
+  </header>
+
+  <div class="container">
+    <div class="card" (click)="irAVentas()">
+      <h2>Productos Más Vendidos</h2>
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Cantidad vendida</th>
+        </tr>
+        <tr *ngFor="let producto of marcas">
+          <td>{{ producto.producto__id }}</td>
+          <td>{{ producto.producto__nombre }}</td>
+          <td>{{ producto.total_cantidad }}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card" (click)="irAProductos()">
+      <h2>Notificaciones Productos con stock menor a 100</h2>
+      <table>
+        <tr>
+          <th>Nombre</th>
+          <th>Cantidad Stock</th>
+          <th>Fecha Ultima Actualizacion</th>
+          <th>Tienda</th>
+        </tr>
+        <tr *ngFor="let producto of productos2">
+          <td>{{ producto.producto__nombre }}</td>
+          <td>{{ producto.cantidad_stock }}</td>
+          <td>{{ producto.fecha_ultima_actualizacion }}</td>
+          <td>{{ producto.tienda__tienda }}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Acceso Rápido</h2>
+      <button routerLink="/inventario">Inventario</button>
+      <button routerLink="/compras">Compras</button>
+      <button routerLink="/ventas">Ventas</button>
+    </div>
+  </div>
+</body>
+</html>

@@ -19,7 +19,7 @@ export class ProductosService {
     private httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`, // Obtén el token desde localStorage
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`, 
       }),
     };
   
@@ -37,6 +37,19 @@ export class ProductosService {
 
     getProveedores(): Observable<{ message: string, usuarios: Usuarios[] }> {
       return this.http.get<{ message: string, usuarios: Usuarios[] }>(`${this.apiUrl}/users`);
+    }
+
+    actualizarProducto(producto: Producto): Observable<{ message: string; productos: Producto[] }> {
+      const { id } = producto;
+      return this.http.put<{ message: string; productos: Producto[] }>(
+        `${this.apiUrl}/productos/${id}`,
+        producto, // Asegúrate de enviar los datos del producto que se quiere actualizar.
+        this.httpOptions
+      );
+    }
+
+    eliminarProducto(categoria_id: number): Observable<{ message: string; categorias: Producto[]; }> {
+      return this.http.delete<{ message: string; categorias: Producto[]; }>(`${this.apiUrl}/productos/${categoria_id}`, this.httpOptions);
     }
 
     agregarProducto(tienda: { nombre: string, descripcion: string, precio: number, cantidad_minima: number, categoria_id: number, marca_id: number, proveedor_id: number }): Observable<{ mensaje: string }> {

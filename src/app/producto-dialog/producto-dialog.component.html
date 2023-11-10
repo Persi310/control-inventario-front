@@ -1,26 +1,35 @@
-<h1>{{ data.isEditing ? 'Editar Categoría' : 'Ver Categoría' }}</h1>
-<form>
-  <div class="form-group">
-    <label for="categoria">Nombre de la Categoría</label>
-    <input
-      type="text"
-      class="form-control"
-      id="categoria"
-      name="categoria"
-      [(ngModel)]="categoria.nombre"
-      [disabled]="!data.isEditing"
-    />
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1 class="modal-title fs-5" id="exampleModalLabel">{{ data.isEditing ? 'Editar Producto' : 'Ver Producto' }}</h1>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" class="form-control" id="nombre" name="nombre" [value]="data.producto.nombre" [disabled]="!data.isEditing">
+          <label for="descripcion" class="form-label">Descripción</label>
+          <input type="text" class="form-control" id="descripcion" name="descripcion" [value]="data.producto.descripcion" [disabled]="!data.isEditing">
+          <label for="precio" class="form-label">Precio</label>
+          <input type="text" class="form-control" id="precio" name="precio" [value]="data.producto.precio" [disabled]="!data.isEditing">
+          <label for="cantidad_minima" class="form-label">Cantidad Mínima</label>
+          <input type="text" class="form-control" id="cantidad_minima" name="cantidad_minima" [value]="data.producto.cantidad_minima" [disabled]="!data.isEditing">
+          
+          <!-- Muestra proveedor, marca y categoría solo cuando no estás editando -->
+          <div *ngIf="!data.isEditing">
+            <label for="categoria" class="form-label">Categoría</label>
+            <input type="text" class="form-control" id="categoria" name="categoria" [value]="data.producto.categoria" [disabled]="true">
+            <label for="marca" class="form-label">Marca</label>
+            <input type="text" class="form-control" id="marca" name="marca" [value]="data.producto.marca" [disabled]="true">
+            <label for="proveedor" class="form-label">Proveedor</label>
+            <input type="text" class="form-control" id="proveedor" name="proveedor" [value]="data.producto.proveedor" [disabled]="true">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cerrarDialog()">Cerrar</button>
+      <button *ngIf="data.isEditing" type="button" class="btn btn-primary" (click)="guardarCambios()">Guardar cambios</button>
+    </div>
   </div>
-</form>
-
-<div class="modal-footer">
-  <button type="button" class="btn btn-secondary" (click)="cerrarDialog()">Cerrar</button>
-  <button
-    *ngIf="data.isEditing"
-    type="button"
-    class="btn btn-primary"
-    (click)="guardarCambios()"
-  >
-    Guardar Cambios
-  </button>
 </div>

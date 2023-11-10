@@ -1,0 +1,38 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1>Detalles de la Compra</h1>
+      </div>
+      <div class="modal-body">
+        <p>ID de Compra: {{ compra.id }}</p>
+        <p>Fecha Efectuada de la compra: {{ compra.fecha }}</p>
+        <!-- Otros detalles de la compra -->
+  
+        <h2>Productos de la Compra</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Precio Unitario</th>
+              <th>Cantidad</th>
+              <th>Subtotal</th>
+              <!-- Otros encabezados si es necesario -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let producto of productosCompra">
+              <td>{{ producto.producto__nombre }}</td>
+              <td>{{ producto.precio_unitario }}</td>
+              <td>{{ producto.cantidad }}</td>
+              <td>{{ producto.cantidad * producto.precio_unitario }}</td>
+              <!-- Otros detalles del producto -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="cerrarDialog()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+  

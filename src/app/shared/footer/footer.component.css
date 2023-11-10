@@ -1,39 +1,23 @@
+/* Estilos para el footer */
 .footer {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: #333;
-  color: white;
-  padding: 8px 0; /* Ajusta el padding vertical */
-  font-size: 14px; /* Ajusta el tamaño de fuente */
+  background-color: #2C3E50; /* Color de fondo del footer */
+  color: #fff;
+  padding: 10px 0;
+  font-family: 'Roboto', sans-serif; /* Cambio de la tipografía */
+  z-index: 1000; /* Asegura que el footer esté en la parte superior */
 }
 
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 10px; /* Ajusta el padding horizontal */
-}
-
+/* Estilos para el área del logo en el footer */
 .footer-logo img {
-  max-width: 80px; /* Ajusta el tamaño máximo de la imagen */
+  max-width: 100px; /* Ancho máximo para la imagen del logo */
+  height: auto;
 }
 
-.footer-links ul {
-  list-style: none;
-  display: flex;
-  gap: 10px; /* Ajusta el espacio entre los elementos */
-}
-
-.footer-links a {
-  text-decoration: none;
-  color: white;
-  font-size: 12px; /* Ajusta el tamaño de fuente */
-}
-
+/* Estilos para el área inferior del footer */
 .footer-bottom {
   text-align: center;
-  margin-top: 2px; /* Ajusta el margen superior */
-  font-size: 12px; /* Ajusta el tamaño de fuente */
+  margin-top: 10px;
 }
-  

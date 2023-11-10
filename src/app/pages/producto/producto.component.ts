@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProductoDialogComponent } from 'src/app/producto-dialog/producto-dialog.component';
 import { ConfirmDialogComponent } from 'src/app/confirm-dialog/confirm-dialog.component';
 
+
 @Component({
   selector: 'app-producto',
   templateUrl: './producto.component.html',
@@ -87,28 +88,79 @@ export class ProductoComponent {
     this.nuevoProducto = { nombre:'', descripcion: '', precio: 0.00, cantidad_minima: 0, categoria_id: 0, marca_id: 0, proveedor_id: 0};
   }
 
-  verProducto(productos: Producto) {
-    this.dialog.open(ProductoDialogComponent, {
-      data: { productos },
+  verProducto(producto: Producto) {
+    const marca = producto.marca__marca;
+    const categoria = producto.categoria__categoria;
+    const proveedor = producto.proveedor__first_name;
+  
+    const productoDetallado = { ...producto, marca, categoria, proveedor };
+  
+    this.dialog.open(ProductoDialogComponent, { data: { producto: productoDetallado } });
+  }
+
+  obtenerNombreProveedor(id: number): string {
+    const proveedorEncontrado = this.proveedores.find(proveedor => proveedor.id === id);
+    return proveedorEncontrado ? proveedorEncontrado.first_name : '';
+  }
+  
+  obtenerNombreMarca(id: number): string {
+    const marcaEncontrada = this.marcas.find(marca => marca.id === id);
+    return marcaEncontrada ? marcaEncontrada.marca : '';
+  }
+  
+  obtenerNombreCategoria(id: number): string {
+    const categoriaEncontrada = this.categorias.find(categoria => categoria.id === id);
+    return categoriaEncontrada ? categoriaEncontrada.categoria : '';
+  }
+  
+  editarProducto(producto: Producto) {
+    const dialogRef = this.dialog.open(ProductoDialogComponent, {
+      data: { producto, isEditing: true }, // Asegúrate de que 'producto' tenga los datos actualizados.
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('Resultado del diálogo:', result);
+      if (result && result.isEditing) {
+        // Lógica de actualización del producto aquí
+        this.productoService.actualizarProducto(result.producto).subscribe(
+          (data) => {
+            console.log(data);
+            this._snackBar.open('Producto editado satisfactoriamente', 'X');
+            // Actualizar la lista de productos después de editar uno.
+            this.productoService.getProductos().subscribe((data) => {
+              this.productos = data.productos;
+            });
+          },
+          (error) => {
+            console.error('Error al editar el producto:', error);
+            this._snackBar.open(error, 'X');
+          }
+        );
+      }
     });
   }
   
-  editarProducto(productos: Producto) {
-    this.dialog.open(ProductoDialogComponent, {
-      data: { productos, isEditing: true },
-    });
-  }
-  
-  eliminarProducto(productos: any) {
+  eliminarProducto(producto: Producto) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      data: { message: '¿Seguro que deseas eliminar esta categoría?' },
+      data: { message: '¿Seguro que deseas eliminar este producto?' },
     });
   
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        // Lógica para eliminar la categoría aquí.
-        // Implementa la lógica de eliminación de la categoría.
-        // Por ejemplo, this.categoriasService.eliminarCategoria(categoria.id);
+        this.productoService.eliminarProducto(producto.id).subscribe(
+          (data) => {
+            console.log(data);
+            this._snackBar.open('Producto eliminado satisfactoriamente', 'X');
+            // Vuelve a cargar la lista de productos después de eliminar uno.
+            this.productoService.getProductos().subscribe((data) => {
+              this.productos = data.productos;
+            });
+          },
+          (error) => {
+            console.error('Error al eliminar el producto:', error);
+            this._snackBar.open(error, 'X');
+          }
+        );
       }
     });
   }

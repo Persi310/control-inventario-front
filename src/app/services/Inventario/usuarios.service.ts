@@ -24,6 +24,19 @@ export class UsuariosService {
       return this.http.get<{ message: string, usuarios: Usuarios[] }>(`${this.apiUrl}/users`);
     }
 
+    actualizarUsuarios(usuario: Usuarios): Observable<{ message: string; usuarios: Usuarios[] }> {
+      const id = usuario.id; // Asegúrate de obtener el ID del usuario
+      return this.http.put<{ message: string; usuarios: Usuarios[] }>(
+        `${this.apiUrl}/users/${id}`, // Incluye el ID en la URL
+        usuario, // Asegúrate de enviar el objeto usuario con el ID y los datos a actualizar
+        this.httpOptions
+      );
+    }
+
+    eliminarUsuarios(usuario_id: number): Observable<{ message: string; usuarios: Usuarios[]; }> {
+      return this.http.delete<{ message: string; usuarios: Usuarios[]; }>(`${this.apiUrl}/users/${usuario_id}`, this.httpOptions);
+    }
+
     agregarUsuarios(tienda: { first_name: string, username: string, last_name: string, is_superuser: boolean, is_staff: boolean, is_active: boolean,date_joined: string, email: string, password: string, direccion: string, telefono: string, nombre_empresa: string }): Observable<{ mensaje: string }> {
       return this.http.post<{ mensaje: string }>(`${this.apiUrl}/users`, tienda, this.httpOptions)
         .pipe(

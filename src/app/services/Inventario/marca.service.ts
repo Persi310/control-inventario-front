@@ -16,12 +16,26 @@ export class MarcaService {
     private httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`, // Obtén el token desde localStorage
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`, 
       }),
     };
   
     getMarcas(): Observable<{ message: string, marcas: Marca[] }> {
       return this.http.get<{ message: string, marcas: Marca[] }>(`${this.apiUrl}/marcas`);
+    }
+
+    actualizarMarca(marca_parametro: Marca): Observable<{ message: string; marcas: Marca[] }> {
+      const { id, marca } = marca_parametro; 
+      const marcaActualizada = { marca };
+      return this.http.put<{ message: string; marcas: Marca[] }>(
+        `${this.apiUrl}/marcas/${id}`,
+        marcaActualizada, 
+        this.httpOptions
+      );
+    }
+
+    eliminarMarca(marca_id: number): Observable<{ message: string; marcas: Marca[]; }> {
+      return this.http.delete<{ message: string; marcas: Marca[]; }>(`${this.apiUrl}/marcas/${marca_id}`, this.httpOptions);
     }
 
     agregarMarca(marca: string): Observable<{ mensaje: string }> {

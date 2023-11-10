@@ -1,4 +1,3 @@
-/* Estilos para el modal "Agregar Categoría" */
 .modal-dialog {
     width: 100%; /* Ancho del modal */
   }
@@ -18,21 +17,34 @@
     padding: 10px; /* Ajusta el relleno del encabezado y pie de página del modal */
   }
   
-  /* Estilos para los botones en el modal */
-  .btn-secondary, .btn-primary {
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    color: white; /* Texto en color blanco */
-    margin-right: 10px; /* Ajusta el margen derecho entre botones */
+  .modal-header h1 {
+    font-size: 1.5rem;
+    margin: 0;
   }
   
-  .btn-secondary {
-    background-color: #6c757d; /* Color de fondo del botón "Cerrar" */
+  .modal-body {
+    padding-bottom: 15px;
   }
   
-  .btn-primary {
-    background-color: #007bff; /* Color de fondo del botón "Guardar cambios" */
+  .modal-body p {
+    margin: 10px 0;
   }
+  
+  .modal-body h2 {
+    margin-bottom: 15px;
+  }
+  
+  .list-group {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .list-group-item {
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
   

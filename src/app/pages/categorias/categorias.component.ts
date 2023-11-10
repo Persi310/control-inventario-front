@@ -55,7 +55,6 @@ export class CategoriasComponent {
   }
   
   editarCategoria(categoria: Categoria) {
-    console.log('Editar categoría:', categoria);
     const dialogRef = this.dialog.open(CategoriaDialogComponent, {
       data: { categoria, isEditing: true },
     });

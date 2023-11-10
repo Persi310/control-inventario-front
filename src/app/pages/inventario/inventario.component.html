@@ -1,16 +1,22 @@
- 
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Cantidad de Stock</th>
-        <th>Fecha de ultima Actualizacion</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let inventarios of inventarios">
-        <td>{{ inventarios.id }}</td>
-      </tr>
-    </tbody>
-  </table>
-  
+<div class="container">
+<table class="table table-striped table-bordered mt-3">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Producto</th>
+      <th>Cantidad de Stock</th>
+      <th>Tienda</th>
+      <th>Fecha de última Actualización</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let inventario of inventarios">
+      <td>{{ inventario.id }}</td>
+      <td>{{ inventario.producto__nombre }}</td>
+      <td>{{ inventario.cantidad_stock }}</td>
+      <td>{{ inventario.tienda__tienda }}</td>
+      <td>{{ inventario.fecha_ultima_actualizacion | date: 'medium' }}</td>
+    </tr>
+  </tbody>
+</table>
+</div>

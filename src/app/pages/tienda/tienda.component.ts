@@ -50,28 +50,70 @@ export class TiendaComponent {
     this.nuevaTienda = { tienda: '', direccion: '' };
   }
 
-  verTienda(tiendas: Tienda) {
+  verTienda(tienda: Tienda) {
     this.dialog.open(TiendaDialogComponent, {
-      data: { tiendas },
+      data: { tienda, isEditing: false },
     });
   }
   
-  editarTienda(tiendas: Tienda) {
-    this.dialog.open(TiendaDialogComponent, {
-      data: { tiendas, isEditing: true },
+  editarTienda(tienda: Tienda) {
+    console.log('Editar tienda:', tienda);
+    const dialogRef = this.dialog.open(TiendaDialogComponent, {
+      data: { tienda, isEditing: true },
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('Resultado del diálogo:', result);
+      if (result && result.isEditing) {
+        this.tiendaService.actualizarTienda(result.tienda).subscribe(
+          (data) => {
+            console.log(data);
+            this._snackBar.open("Tienda editada satisfactoriamente", "X");
+            // Recargar la lista de tiendas después de la edición
+            this.tiendaService.getTiendas().subscribe(
+              (tiendas) => {
+                this.tiendas = tiendas.tiendas;
+              },
+              (error) => {
+                console.error('Error al obtener las tiendas:', error);
+              }
+            );
+          },
+          (error) => {
+            console.error('Error al editar la tienda:', error);
+            this._snackBar.open(error, "X");
+          }
+        );
+      }
     });
   }
   
-  eliminarTienda(tiendas: any) {
+  eliminarTienda(tienda: Tienda) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      data: { message: '¿Seguro que deseas eliminar esta categoría?' },
+      data: { message: '¿Seguro que deseas eliminar esta tienda?' },
     });
   
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        // Lógica para eliminar la categoría aquí.
-        // Implementa la lógica de eliminación de la categoría.
-        // Por ejemplo, this.categoriasService.eliminarCategoria(categoria.id);
+        this.tiendaService.eliminarTienda(tienda.id).subscribe(
+          (data) => {
+            console.log(data);
+            this._snackBar.open('Tienda eliminada satisfactoriamente', 'X');
+            // Actualizar la lista de tiendas después de eliminar una
+            this.tiendaService.getTiendas().subscribe(
+              (tiendas) => {
+                this.tiendas = tiendas.tiendas;
+              },
+              (error) => {
+                console.error('Error al obtener las tiendas:', error);
+              }
+            );
+          },
+          (error) => {
+            console.error('Error al eliminar la tienda:', error);
+            this._snackBar.open(error, 'X');
+          }
+        );
       }
     });
   }

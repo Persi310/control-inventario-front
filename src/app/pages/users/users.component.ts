@@ -38,7 +38,7 @@ export class UsersComponent {
     this.usuariosService.agregarUsuarios(this.nuevoUsuarios).subscribe(
       (data) => {
         console.log(data);
-        this._snackBar.open("Producto agregado satisfactoriamente", "X");
+        this._snackBar.open("Usuario agregado satisfactoriamente", "X");
       },
       (error) => {
         console.error('Error al agregar la marca:', error);
@@ -49,28 +49,70 @@ export class UsersComponent {
     this.nuevoUsuarios = { first_name: '', username: '', last_name: '', is_superuser: true, is_staff: true, is_active: true,date_joined: '', email: '', password: '', direccion: '', telefono: '', nombre_empresa: ''};
   }
 
-  verUsers(usuarios: Usuarios) {
+  verUsers(usuario: Usuarios) {
     this.dialog.open(UsersDialogComponent, {
-      data: { usuarios },
+      data: { usuario }, // Pasar el usuario directamente
     });
   }
   
-  editarUsers(usuarios: Usuarios) {
-    this.dialog.open(UsersDialogComponent, {
-      data: { usuarios, isEditing: true },
+  editarUsers(usuario: Usuarios) {
+    console.log('Editar usuario:', usuario);
+    const dialogRef = this.dialog.open(UsersDialogComponent, {
+      data: { usuario, isEditing: true, userId: usuario.id }, // Pasar el ID del usuario al diálogo
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('Resultado del diálogo:', result);
+      if (result && result.isEditing) {
+        this.usuariosService.actualizarUsuarios(result.usuario).subscribe(
+          (data) => {
+            console.log(data);
+            this._snackBar.open("Usuario editado satisfactoriamente", "X");
+            // Recargar la lista de usuarios después de la edición
+            this.usuariosService.getUsers().subscribe(
+              (data) => {
+                this.usuarios = data.usuarios; // Actualiza this.usuarios
+              },
+              (error) => {
+                console.error('Error al obtener los usuarios:', error);
+              }
+            );
+          },
+          (error) => {
+            console.error('Error al editar el usuario:', error);
+            this._snackBar.open(error, "X");
+          }
+        );
+      }
     });
   }
   
-  eliminarUsers(usuarios: any) {
+  eliminarUsers(usuario: Usuarios) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      data: { message: '¿Seguro que deseas eliminar esta categoría?' },
+      data: { message: '¿Seguro que deseas eliminar este usuario?' },
     });
   
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        // Lógica para eliminar la categoría aquí.
-        // Implementa la lógica de eliminación de la categoría.
-        // Por ejemplo, this.categoriasService.eliminarCategoria(categoria.id);
+        this.usuariosService.eliminarUsuarios(usuario.id).subscribe(
+          (data) => {
+            console.log(data);
+            this._snackBar.open('Usuario eliminado satisfactoriamente', 'X');
+            // Actualizar la lista de usuarios después de eliminar uno
+            this.usuariosService.getUsers().subscribe(
+              (data) => {
+                this.usuarios = data.usuarios; // Actualiza la lista de usuarios
+              },
+              (error) => {
+                console.error('Error al obtener los usuarios:', error);
+              }
+            );
+          },
+          (error) => {
+            console.error('Error al eliminar el usuario:', error);
+            this._snackBar.open(error, 'X');
+          }
+        );
       }
     });
   }

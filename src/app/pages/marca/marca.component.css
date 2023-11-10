@@ -1,20 +1,68 @@
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  
-  th, td {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-  }
-  
-  th {
-    background-color: #f2f2f2;
-  }
-  
-  /* Estilos para resaltar filas al pasar el mouse */
-  tr:hover {
-    background-color: #f5f5f5;
-  }
+.container {
+  padding: 20px;
+  margin-bottom: 200px; /* Agrega un relleno para separar los elementos */
+}
+/* Estilos para el botón "Agregar Marca" */
+.btn-add-brand {
+  display: block;
+  margin: 0 auto; /* Centrar horizontalmente */
+  width: 200px; /* Ajustar el ancho según el diseño */
+  margin-bottom: 20px; /* Espacio inferior adicional */
+  padding: 8px 16px; /* Ajuste del relleno del botón */
+  border-radius: 4px;
+  background-color: #007bff; /* Color de fondo del botón */
+  color: #fff; /* Texto en color blanco */
+  cursor: pointer;
+}
+
+/* Estilos para el modal "Agregar Marca" */
+.modal-content {
+  background-color: #2C3E50; /* Color de fondo del modal */
+}
+
+.modal-header, .modal-footer {
+  background-color: #2C3E50; /* Misma tonalidad que el fondo del modal */
+  color: white; /* Texto en color blanco */
+}
+
+.modal-body input[type="text"] {
+  color: #000; /* Cambiar el color del texto a negro */
+  padding: 8px; /* Ajustar el relleno según sea necesario */
+}
+
+.modal-body label {
+  color: #fff; /* Cambiar el color del texto del label a blanco */
+  margin-bottom: 5px; /* Ajustar el margen inferior según sea necesario */
+}
+/* Estilos para la tabla del módulo de marcas */
+table th,
+table td {
+  text-align: center;
+  padding: 8px;
+}
+
+/* Estilos para los botones del módulo de marcas */
+.modal-content .modal-body .btn-info,
+.modal-content .modal-body .btn-warning,
+.modal-content .modal-body .btn-danger {
+  padding: 5px 10px;
+  margin: 0 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-info {
+  background-color: #5bc0de; /* Botón "Ver" */
+  color: #fff;
+}
+
+.btn-warning {
+  background-color: #f0ad4e; /* Botón "Editar" */
+  color: #fff;
+}
+
+.btn-danger {
+  background-color: #d9534f; /* Botón "Eliminar" */
+  color: #fff;
+}

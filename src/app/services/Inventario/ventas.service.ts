@@ -25,11 +25,17 @@ export class VentasService {
       return this.http.get<{ message: string, ventas: Venta[] }>(`${this.apiUrl}/ventas`);
     }
 
-    agregarVenta(venta: {producto: string, cantidad: number , precio: number}): Observable<{ mensaje: string }> {
-      return this.http.post<{ mensaje: string }>(`${this.apiUrl}/ventas`, { venta }, this.httpOptions)
+    agregarVenta(venta: { fecha: string; usuario_id: number; productos: any[] }): Observable<{ mensaje: string }> {
+      console.log('Datos a enviar:', venta);
+      return this.http.post<{ mensaje: string }>(`${this.apiUrl}/ventas`, { venta })
         .pipe(
           catchError(this.handleError)
-        );
+  );
+    }
+
+    getProductosVenta(compraId: number) {
+      return this.http.get<any>(`http://127.0.0.1:8000/api/productos_venta/${compraId}`);
+      // Reemplaza 'ID' con el ID real de la compra que deseas mostrar
     }
 
     private handleError(error: HttpErrorResponse) {

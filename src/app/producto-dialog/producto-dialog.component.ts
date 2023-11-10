@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Producto } from '../models/producto';
 
 @Component({
   selector: 'app-producto-dialog',
@@ -7,13 +8,14 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./producto-dialog.component.css']
 })
 export class ProductoDialogComponent {
-  categoria: any = {};
+  producto: Producto;
 
   constructor(
     public dialogRef: MatDialogRef<ProductoDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.categoria = { ...data.categoria }; // Copia la categoría para evitar cambios en el objeto original
+    // Realiza una copia de la instancia del Producto
+    this.producto = { ...data.producto };
   }
 
   cerrarDialog(): void {
@@ -21,8 +23,7 @@ export class ProductoDialogComponent {
   }
 
   guardarCambios(): void {
-    // Aquí puedes implementar la lógica para guardar los cambios en la categoría
-    // this.categoria contiene la categoría editada
-    this.dialogRef.close();
+    // Enviar los datos actualizados al componente principal
+    this.dialogRef.close({ producto: this.producto, isEditing: true });
   }
 }

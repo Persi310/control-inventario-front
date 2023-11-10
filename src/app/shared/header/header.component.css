@@ -1,25 +1,43 @@
+/* Estilos para el header */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #333;
-  color: white;
+  background-color: #2C3E50; /* Color de fondo del header */
+  color: white; /* Texto en color blanco */
+  font-family: 'Roboto', sans-serif; /* Fuente */
 }
 
+/* Estilos para el logo en el header */
 .logo img {
-  max-width: 100px;
+  max-width: 100px; /* Ancho máximo para la imagen del logo */
 }
 
+/* Estilos para los botones del header */
 .header-buttons {
   display: flex;
   gap: 10px;
 }
 
 .header-buttons button {
-  background-color: transparent;
+  background-color: #3498DB; /* Color de fondo del botón */
+  color: white; /* Texto en color blanco */
   border: none;
-  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 14px;
+  transition: background-color 0.3s, color 0.3s; /* Transición suave al pasar el cursor */
+  font-family: 'Roboto', sans-serif; /* Fuente */
+}
+
+/* Estilos al pasar el cursor sobre los botones del header */
+.header-buttons button:hover {
+  background-color: #2E86C1; /* Color de fondo al pasar el cursor */
+}
+
+/* Estilos para el botón de cerrar sesión */
+.header-buttons .logout-button {
+  background-color: red; /* Cambiar el color de fondo a rojo */
+  /* Puedes ajustar otros estilos como color del texto, borde, etc., según tus preferencias */
 }

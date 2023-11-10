@@ -1,7 +1,14 @@
-<h2>Confirmación</h2>
-<p>{{ data.message }}</p>
-
-<div class="modal-footer">
-  <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
-  <button type="button" class="btn btn-danger" (click)="confirmar()">Confirmar</button>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmación</h1>
+    </div>
+    <div class="modal-body">
+      <p>¿Seguro que deseas eliminar?</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cancelar()">Cancelar</button>
+      <button type="button" class="btn btn-danger" (click)="confirmar()">Confirmar</button>
+    </div>
+  </div>
 </div>

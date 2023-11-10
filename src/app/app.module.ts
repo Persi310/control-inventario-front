@@ -28,6 +28,8 @@ import { MarcaDialogComponent } from './marca-dialog/marca-dialog.component';
 import { ProductoDialogComponent } from './producto-dialog/producto-dialog.component';
 import { TiendaDialogComponent } from './tienda-dialog/tienda-dialog.component';
 import { UsersDialogComponent } from './users-dialog/users-dialog.component';
+import { CompraDialogComponent } from './compra-dialog/compra-dialog.component';
+import { VentaDialogComponent } from './venta-dialog/venta-dialog.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,8 @@ import { UsersDialogComponent } from './users-dialog/users-dialog.component';
     ProductoDialogComponent,
     TiendaDialogComponent,
     UsersDialogComponent,
+    CompraDialogComponent,
+    VentaDialogComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,10 @@
+/* Estilos para la tabla del inventario */
+.table {
+    width: 100%;
+  }
+  
+  .table th, .table td {
+    text-align: center;
+    padding: 8px;
+  }
+  

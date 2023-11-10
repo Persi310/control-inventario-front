@@ -1,61 +1,94 @@
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Agregar Compra
-  </button>
-  
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Fecha</th>
-        <th>Total</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let compras of compras">
-        <td>{{ compras.id }}</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Compra</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="mb-3">
-              <label for="producto_id" class="form-label">Productos</label>
-              <select class="form-select" id="producto_id" name="producto_id" [(ngModel)]="nuevaCompra.producto_id">
-                <option *ngFor="let producto of productos" [value]="producto.id">{{ producto.descripcion }}</option>
-              </select>
-            </div>
-            <div class="mb-3">
-              <label for="cantidad" class="form-label">Cantidad</label>
-              <input type="number" class="form-control" id="cantidad" name="cantidad" [(ngModel)]="nuevaCompra.cantidad">
-            </div>
-            <div class="mb-3">
-              <label for="precio" class="form-label">Precio</label>
-              <input type="number" class="form-control" id="precio" name="precio" [(ngModel)]="nuevaCompra.precio">
-            </div>
-            <!-- Agregar más campos según tus necesidades (por ejemplo, fecha de compra, proveedor, etc.) -->
-            <button type="button" class="btn btn-success" (click)="agregarCompras()">Agregar Producto</button>
-          </form>
-  
-          <!-- Lista de productos agregados -->
-          <ul>
-            <li *ngFor="let producto of productosAgregados">
-              {{ producto.cantidad }} - Cantidad: {{ producto.precio_unitario }} - Precio: {{ producto.subtotal }}
-            </li>
-          </ul>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary" (click)="finalizarCompra()">Finalizar Compra</button>
-        </div>
+<div class="container">
+<button type="button" class="btn btn-primary btn-add-category" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Agregar Compra
+</button>
+
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Fecha</th>
+      <th>Total</th>
+      <th>Usuario</th>
+      <th>Productos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let compra of compras">
+      <td>{{ compra.id }}</td>
+      <td>{{ compra.fecha }}</td>
+      <td>Q.{{ compra.total }}</td>
+      <td>{{ compra.usuario__first_name }}</td>
+      <td>
+        <button class="btn btn-info btn-sm" (click)="verProductos(compra)">Ver</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Compra</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form *ngIf="!agregarProductosFormVisible">
+          <div class="mb-3">
+            <label for="fecha" class="form-label">Fecha</label>
+            <input type="date" class="form-control" id="fecha" name="fecha" [(ngModel)]="nuevaCompra.fecha">
+          </div>
+          <div class="mb-3">
+            <label for="usuario_id" class="form-label">Usuarios</label>
+            <select class="form-select" id="usuario_id" name="usuario_id" [(ngModel)]="nuevaCompra.usuario_id">
+              <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">{{ proveedor.first_name }}</option>
+            </select>
+          </div>
+          <button type="button" class="btn btn-success" (click)="mostrarFormularioProductos()">Continuar</button>
+        </form>
+
+        <form *ngIf="agregarProductosFormVisible">
+          <div class="mb-3">
+            <label for="producto_id" class="form-label">Productos</label>
+            <select class="form-select" id="producto_id" name="producto_id" [(ngModel)]="nuevaCompra.producto_id">
+              <option *ngFor="let producto of productos" [value]="producto.id">{{ producto.nombre }}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="precio" class="form-label">Precio</label>
+            <input type="number" class="form-control" id="precio" name="precio" [(ngModel)]="nuevaCompra.precio">
+          </div>
+          <div class="mb-3">
+            <label for="cantidad" class="form-label">Cantidad</label>
+            <input type="number" class="form-control" id="cantidad" name="cantidad" [(ngModel)]="nuevaCompra.cantidad">
+          </div>
+          <button type="button" class="btn btn-success" (click)="agregarProducto()">Agregar Producto</button>
+        </form>
+
+        <table class="table table-striped table-bordered mt-3">
+          <thead>
+            <tr>
+              <th>Cantidad</th>
+              <th>Precio</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let producto of productosSeleccionados">
+              <td>{{ producto.cantidad }}</td>
+              <td>Q. {{ producto.precio }}</td>
+              <td>Q. {{ producto.cantidad * producto.precio }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button *ngIf="agregarProductosFormVisible" type="button" class="btn btn-primary" (click)="finalizarCompra()">Finalizar Compra</button>
       </div>
     </div>
   </div>
-  
+</div>
+</div>

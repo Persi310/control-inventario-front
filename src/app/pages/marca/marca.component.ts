@@ -49,28 +49,56 @@ export class MarcaComponent {
     this.nuevaMarca = '';
   }
 
-  verMarca(marcas: Marca) {
+  verMarca(marca: Marca) {
     this.dialog.open(MarcaDialogComponent, {
-      data: { marcas },
+      data: { marca },
     });
   }
   
-  editarMarca(marcas: Marca) {
-    this.dialog.open(MarcaDialogComponent, {
-      data: { marcas, isEditing: true },
+  editarMarca(marca: Marca) {
+    console.log('Editar marca:', marca);
+    const dialogRef = this.dialog.open(MarcaDialogComponent, {
+      data: { marca, isEditing: true },
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('Resultado del diálogo:', result);
+      if (result && result.isEditing) {
+        this.marcaService.actualizarMarca(result.marca).subscribe(
+          (data) => {
+            console.log(data);
+            this._snackBar.open('Marca editada satisfactoriamente', 'X');
+          },
+          (error) => {
+            console.error('Error al editar la marca:', error);
+            this._snackBar.open(error, 'X');
+          }
+        );
+      }
     });
   }
   
-  eliminarMarca(marcas: any) {
+  eliminarMarca(marca: Marca) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      data: { message: '¿Seguro que deseas eliminar esta categoría?' },
+      data: { message: '¿Seguro que deseas eliminar esta marca?' },
     });
   
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        // Lógica para eliminar la categoría aquí.
-        // Implementa la lógica de eliminación de la categoría.
-        // Por ejemplo, this.categoriasService.eliminarCategoria(categoria.id);
+        this.marcaService.eliminarMarca(marca.id).subscribe(
+          (data) => {
+            console.log(data);
+            this._snackBar.open('Marca eliminada satisfactoriamente', 'X');
+            // Vuelve a obtener la lista de marcas después de eliminar una.
+            this.marcaService.getMarcas().subscribe((data) => {
+              this.marcas = data.marcas;
+            });
+          },
+          (error) => {
+            console.error('Error al eliminar la marca:', error);
+            this._snackBar.open(error, 'X');
+          }
+        );
       }
     });
   }

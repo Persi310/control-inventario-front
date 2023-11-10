@@ -1,26 +1,19 @@
-<h1>{{ data.isEditing ? 'Editar Categoría' : 'Ver Categoría' }}</h1>
-<form>
-  <div class="form-group">
-    <label for="categoria">Nombre de la Categoría</label>
-    <input
-      type="text"
-      class="form-control"
-      id="categoria"
-      name="categoria"
-      [(ngModel)]="categoria.nombre"
-      [disabled]="!data.isEditing"
-    />
+<div class="modal-content">
+  <div class="modal-header">
+    <h1 class="modal-title fs-5" id="exampleModalLabel">{{ data.isEditing ? 'Editar Tienda' : 'Ver Tienda' }}</h1>
   </div>
-</form>
-
-<div class="modal-footer">
-  <button type="button" class="btn btn-secondary" (click)="cerrarDialog()">Cerrar</button>
-  <button
-    *ngIf="data.isEditing"
-    type="button"
-    class="btn btn-primary"
-    (click)="guardarCambios()"
-  >
-    Guardar Cambios
-  </button>
+  <div class="modal-body">
+    <form>
+      <div class="mb-3">
+        <label for="nombreTienda" class="form-label">Tienda</label>
+        <input type="text" class="form-control" id="nombreTienda" name="nombreTienda" [(ngModel)]="tienda.tienda" [disabled]="!data.isEditing">
+        <label for="direccionTienda" class="form-label">Dirección</label>
+        <input type="text" class="form-control" id="direccionTienda" name="direccionTienda" [(ngModel)]="tienda.direccion" [disabled]="!data.isEditing">
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cerrarDialog()">Cerrar</button>
+    <button *ngIf="data.isEditing" type="button" class="btn btn-primary" (click)="guardarCambios()">Guardar cambios</button>
+  </div>
 </div>

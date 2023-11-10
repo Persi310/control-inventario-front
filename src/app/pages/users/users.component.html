@@ -1,4 +1,5 @@
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<div class="container">
+<button type="button" class="btn btn-add-brand" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Agregar Usuario
 </button>
 
@@ -46,41 +47,60 @@
           <!-- Aquí colocamos el formulario -->
           <form>
             <div class="mb-3">
-              <label class="switch">
-                <span>El usuario es un administrador</span>
-                <input type="checkbox" id="is_superuser" [(ngModel)]="nuevoUsuarios.is_superuser">
-                <span class="slider"></span>
-              </label>
-              <label for="username" class="form-label">Username</label>
-              <input type="text" class="form-control" id="username" name="username" [(ngModel)]="nuevoUsuarios.username">
-              <label for="first_name" class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="first_name" name="first_name" [(ngModel)]="nuevoUsuarios.first_name">
-              <label for="last_name" class="form-label">Apellido</label>
-              <input type="text" class="form-control" id="last_name" name="last_name" [(ngModel)]="nuevoUsuarios.last_name">
-              <label class="switch">
-                <span>Activo</span>
-                <input type="checkbox" id="is_active" [(ngModel)]="nuevoUsuarios.is_active">
-                <span class="slider"></span>
-              </label>
-              <label class="switch">
-                <span>El usuario es un administrador</span>
-                <input type="checkbox" id="is_staff" [(ngModel)]="nuevoUsuarios.is_staff">
-                <span class="slider"></span>
-              </label>
-              <label for="date_joined" class="form-label">Fecha de Union</label>
-              <input type="date" class="form-control" id="date_joined" name="date_joined" [(ngModel)]="nuevoUsuarios.date_joined">
-              <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="email" name="email" [(ngModel)]="nuevoUsuarios.email">
-              <label for="password" class="form-label">Password</label>
-              <input type="password" class="form-control" id="password" name="password" [(ngModel)]="nuevoUsuarios.password">
-              <label for="direccion" class="form-label">Direccion</label>
-              <input type="text" class="form-control" id="direccion" name="direccion" [(ngModel)]="nuevoUsuarios.direccion">
-              <label for="telefono" class="form-label">Telefono</label>
-              <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="nuevoUsuarios.telefono">
-              <label for="nombre_empresa" class="form-label">Nombre de la empresa</label>
-              <input type="text" class="form-control" id="nombre_empresa" name="nombre_empresa" [(ngModel)]="nuevoUsuarios.nombre_empresa">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="username" [(ngModel)]="nuevoUsuarios.username">
             </div>
-          </form>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" [(ngModel)]="nuevoUsuarios.password">
+            </div>
+            <div class="mb-3">
+                <label for="first_name" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="first_name" name="first_name" [(ngModel)]="nuevoUsuarios.first_name">
+            </div>
+            <div class="mb-3">
+                <label for="last_name" class="form-label">Apellido</label>
+                <input type="text" class="form-control" id="last_name" name="last_name" [(ngModel)]="nuevoUsuarios.last_name">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" [(ngModel)]="nuevoUsuarios.email">
+            </div>
+            <div class="mb-3">
+              <label for="date_joined" class="form-label">Fecha de Unión</label>
+              <input type="date" class="form-control" id="date_joined" name="date_joined" [(ngModel)]="nuevoUsuarios.date_joined">
+          </div>
+            <div class="mb-3">
+                <label for="direccion" class="form-label">Dirección</label>
+                <input type="text" class="form-control" id="direccion" name="direccion" [(ngModel)]="nuevoUsuarios.direccion">
+            </div>
+            <div class="mb-3">
+                <label for="telefono" class="form-label">Teléfono</label>
+                <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="nuevoUsuarios.telefono">
+            </div>
+            <div class="mb-3">
+                <label for="nombre_empresa" class="form-label">Nombre de la empresa</label>
+                <input type="text" class="form-control" id="nombre_empresa" name="nombre_empresa" [(ngModel)]="nuevoUsuarios.nombre_empresa">
+            </div>
+            <div class="mb-3">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="is_superuser" [(ngModel)]="nuevoUsuarios.is_superuser">
+                    <label class="form-check-label" for="is_superuser">El usuario es un administrador</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="is_active" [(ngModel)]="nuevoUsuarios.is_active">
+                    <label class="form-check-label" for="is_active">Activo</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="is_staff" [(ngModel)]="nuevoUsuarios.is_staff">
+                    <label class="form-check-label" for="is_staff">El usuario es un staff</label>
+                </div>
+            </div>
+        </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -89,3 +109,4 @@
       </div>
     </div>
   </div>
+</div>

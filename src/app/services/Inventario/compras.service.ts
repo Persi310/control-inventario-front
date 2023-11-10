@@ -25,11 +25,17 @@ export class ComprasService {
       return this.http.get<{ message: string, compras: Compra[] }>(`${this.apiUrl}/compras`);
     }
 
-    agregarCompras(compra: {producto_id: number, cantidad: number , precio: number}): Observable<{ mensaje: string }> {
-      return this.http.post<{ mensaje: string }>(`${this.apiUrl}/compras`, { compra }, this.httpOptions)
+    agregarCompras(compra: { fecha: string; usuario_id: number; productos: any[] }): Observable<{ mensaje: string }> {
+      console.log('Datos a enviar:', compra);
+      return this.http.post<{ mensaje: string }>(`${this.apiUrl}/compras`, { compra })
         .pipe(
           catchError(this.handleError)
-        );
+  );
+    }
+
+    getProductosCompra(compraId: number) {
+      return this.http.get<any>(`http://127.0.0.1:8000/api/productos_compra/${compraId}`);
+      // Reemplaza 'ID' con el ID real de la compra que deseas mostrar
     }
 
     private handleError(error: HttpErrorResponse) {

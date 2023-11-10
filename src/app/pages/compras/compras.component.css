@@ -1,0 +1,71 @@
+.container {
+  padding: 20px;
+  margin-bottom: 200px; /* Agrega un relleno para separar los elementos */
+}
+/* Estilos para el botón "Agregar Categoría" */
+.btn-add-category {
+  display: block;
+  margin-bottom: 20px; /* Espacio adicional entre el botón y la tabla */
+  margin: 0 auto; /* Centra el botón horizontalmente */
+  width: 200px;
+  margin-bottom: 20px; /* Ajusta el ancho del botón según el diseño */
+}
+/* Estilos para el modal de Compras */
+.modal-content {
+  background-color: #2C3E50; /* Color de fondo del modal */
+  border-radius: 10px; /* Esquinas redondeadas */
+}
+
+.modal-header, .modal-footer {
+  background-color: #2C3E50; /* Misma tonalidad que el fondo del modal */
+  color: white; /* Texto en color blanco */
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.5rem;
+  color: white; /* Texto en color blanco */
+}
+
+.btn-secondary, .btn-primary {
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white; /* Texto en color blanco */
+}
+
+.btn-secondary {
+  background-color: #6c757d; /* Color de fondo del botón "Cerrar" */
+}
+
+.btn-primary {
+  background-color: #007bff; /* Color de fondo del botón "Guardar cambios" */
+}
+
+.modal-body label {
+  color: #fff; /* Texto de los labels en color blanco */
+  margin-bottom: 5px; /* Ajuste del margen inferior */
+}
+
+.modal-body input[type="date"],
+.modal-body input[type="number"],
+.modal-body select {
+  color: #000; /* Cambiar el color del texto a negro */
+  padding: 8px; /* Ajuste del relleno */
+}
+
+/* Estilos para la tabla dentro del modal */
+.table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.table th, .table td {
+  text-align: center;
+  padding: 8px;
+}

@@ -24,6 +24,21 @@ export class TiendasService {
       return this.http.get<{ message: string, tiendas: Tienda[] }>(`${this.apiUrl}/tiendas`);
     }
 
+    actualizarTienda(tiendaActualizada: Tienda): Observable<{ message: string; categorias: Tienda[] }> {
+      const { id, tienda, direccion } = tiendaActualizada; 
+      const body = { tienda, direccion }; // Datos de la tienda a actualizar
+    
+      return this.http.put<{ message: string; categorias: Tienda[] }>(
+        `${this.apiUrl}/tiendas/${id}`,
+        body, // Incluye los datos de la tienda en el cuerpo de la solicitud
+        this.httpOptions
+      );
+    }
+
+    eliminarTienda(categoria_id: number): Observable<{ message: string; categorias: Tienda[]; }> {
+      return this.http.delete<{ message: string; categorias: Tienda[]; }>(`${this.apiUrl}/tiendas/${categoria_id}`, this.httpOptions);
+    }
+
     agregarTienda(tienda: { tienda: string, direccion: string }): Observable<{ mensaje: string }> {
       return this.http.post<{ mensaje: string }>(`${this.apiUrl}/tiendas`, tienda, this.httpOptions)
         .pipe(
